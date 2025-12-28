@@ -1,0 +1,16 @@
+# List of worlds where explosion damage filtering should apply
+worlds:
+  - world
+  - world_nether
+  - world_the_end
+
+# Entities that cannot damage blocks with explosions in the configured worlds
+# Valid values: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html
+no-block-damage:
+  - CREEPER
+  - WITHER
+  - ENDER_DRAGON
+
+# Entities that cannot damage player/entity health with explosions in the configured worlds
+no-health-damage:
+  - CREEPER
