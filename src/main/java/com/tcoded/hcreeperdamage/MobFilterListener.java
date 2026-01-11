@@ -34,6 +34,12 @@ public class MobFilterListener implements Listener {
         if (config.getNoBlockDamage().contains(entityType)) {
             event.blockList().clear();
             plugin.getLogger().info("Prevented " + entityType + " from damaging blocks in world " + worldName + ". Location: " + event.getLocation());
+            return; // If cleared, no need to continue with drops
+        }
+
+        // If enabled, make creepers drop all destroyed blocks
+        if (config.isCreeperDropAllBlocks() && entityType == EntityType.CREEPER) {
+            event.setYield(100); // Set yield to 100% to guarantee drops
         }
     }
 

@@ -9,3 +9,6 @@ no-block-damage:
 
 # Entities that cannot damage player/entity health with explosions in the configured worlds
 no-health-damage: []
+
+# When true, creeper explosions drop every block they destroy (even ones normally lost)
+creeper-drop-all-blocks: false

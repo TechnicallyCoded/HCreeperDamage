@@ -11,6 +11,7 @@ public class PluginConfig {
     private final Set<String> worlds;
     private final Set<EntityType> noBlockDamage;
     private final Set<EntityType> noHealthDamage;
+    private final boolean creeperDropAllBlocks;
 
     public static PluginConfig load(HCreeperDamage plugin) {
         // Load worlds list
@@ -22,12 +23,15 @@ public class PluginConfig {
         // Load no-health-damage list
         List<String> noHealthDamageList = plugin.getConfig().getStringList("no-health-damage");
         
+        // New toggle for creeper block drops
+        boolean creeperDropAllBlocks = plugin.getConfig().getBoolean("creeper-drop-all-blocks", false);
+        
         // Create and return config object
-        return new PluginConfig(worldsList, noBlockDamageList, noHealthDamageList, plugin);
+        return new PluginConfig(worldsList, noBlockDamageList, noHealthDamageList, creeperDropAllBlocks, plugin);
     }
 
     private PluginConfig(List<String> worldsList, List<String> noBlockDamageList, 
-                        List<String> noHealthDamageList, HCreeperDamage plugin) {
+                        List<String> noHealthDamageList, boolean creeperDropAllBlocks, HCreeperDamage plugin) {
         this.worlds = new HashSet<>(worldsList);
         
         this.noBlockDamage = new HashSet<>();
@@ -50,6 +54,8 @@ public class PluginConfig {
             }
         }
 
+        this.creeperDropAllBlocks = creeperDropAllBlocks;
+
         // Validation
         if (worlds.isEmpty()) {
             plugin.getLogger().warning("No worlds configured for explosion damage filtering!");
@@ -69,5 +75,9 @@ public class PluginConfig {
 
     public Set<EntityType> getNoHealthDamage() {
         return noHealthDamage;
+    }
+
+    public boolean isCreeperDropAllBlocks() {
+        return creeperDropAllBlocks;
     }
 }
